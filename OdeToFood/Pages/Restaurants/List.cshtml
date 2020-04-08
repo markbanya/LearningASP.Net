@@ -1,0 +1,54 @@
+﻿@page
+@model OdeToFood.Pages.Restaurants.ListModel
+@{
+    ViewData["Title"] = "List";
+}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<h1>Restaurants</h1>
+
+<form method="get">
+    <div class="form-group">
+        <div class="input-group">
+            <input type="search" class="form-control"  asp-for ="SearchTerm"/>
+            <span class="input-group-btn">
+                <button class="btn btn-default">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Cuisine</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var restaurant in Model.Restaurants)
+    {
+
+<tr>
+    <td>@restaurant.Name</td>
+    <td>@restaurant.Location</td>
+    <td width="100px">@restaurant.Cuisine</td>
+    <td width="80px" >
+        <a class="btn btn-dark btn-default" 
+           asp-page="./Detail"
+           asp-route-restaurantId="@restaurant.Id">
+            Details
+        </a>
+    </td >
+    <td width="80px">
+        <a class="btn btn-dark btn-default" 
+           asp-page="./Edit"
+           asp-route-restaurantId="@restaurant.Id">
+            Edit
+        </a>
+    </td>
+</tr>
+    }
+</table>
+<a asp-page=".\Edit" class="btn btn-primary">Add new Restaurant</a> 
+<div>@Model.Message</div>
